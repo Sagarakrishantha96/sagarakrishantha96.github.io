@@ -1,0 +1,105 @@
+/* Nav component styles */
+/* ── Nav ────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
+}
+.nav--solid {
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-color: var(--line);
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  height: 70px;
+}
+.nav__logo {
+  font: 800 1.5rem var(--display);
+  text-decoration: none;
+  letter-spacing: -0.03em;
+}
+.nav__logo span {
+  color: var(--saffron);
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+.nav__links > a:not(.btn) {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+}
+.nav__links > a:not(.btn):hover {
+  color: var(--text);
+}
+.nav__links > a.is-current {
+  color: var(--text);
+  background: var(--surface-2);
+}
+.nav__links .btn {
+  margin-left: 0.5rem;
+}
+.nav__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.nav__toggle {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .nav__toggle {
+    display: grid;
+  }
+  .nav__actions {
+    margin-left: auto;
+  }
+  .nav__links {
+    position: fixed;
+    inset: 70px 0 auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    padding: 0.5rem 16px 1.25rem;
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      transform 0.25s,
+      opacity 0.25s,
+      visibility 0.25s;
+  }
+  .nav__links.is-open {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+  }
+  .nav__links > a:not(.btn) {
+    padding: 0.85rem 0.5rem;
+    font-size: 1.1rem;
+    border-radius: var(--r-sm);
+  }
+  .nav__links .btn {
+    margin: 0.75rem 0 0;
+    align-self: flex-start;
+  }
+}

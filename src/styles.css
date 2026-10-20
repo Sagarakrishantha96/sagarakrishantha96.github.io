@@ -1,0 +1,300 @@
+/* Project-wide styles: tokens, base elements and pieces shared by several
+   components. Imported in main.jsx before any component styles, so component
+   files in src/styles/ can override these. Add global styles here. */
+
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --bg: #0c1224;
+  --bg-alt: #10172e;
+  --surface: #151e3a;
+  --surface-2: #1b2548;
+  --line: #27325a;
+  --line-strong: #364371;
+  --text: #e8ecf8;
+  --muted: #98a2c3;
+  --saffron: #f5a524; /* brand accent, carried over from the original site */
+  --saffron-ink: #1c1303;
+  --saffron-text: #f7b84b;
+  --lagoon: #3dd6c6; /* "live" signals: data in motion, availability */
+  --shadow: 0 24px 60px -30px rgb(0 0 0 / 0.6);
+
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
+  --body: "Figtree", system-ui, sans-serif;
+
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.5625rem;
+  --step-3: clamp(2rem, 1.4rem + 2.2vw, 3rem);
+  --step-hero: clamp(3rem, 0.8rem + 7vw, 7.25rem);
+
+  --r-lg: 22px;
+  --r-md: 14px;
+  --r-sm: 8px;
+  --max: 1180px;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f5f6fa;
+  --bg-alt: #eceff6;
+  --surface: #ffffff;
+  --surface-2: #f2f4f9;
+  --line: #d9deea;
+  --line-strong: #c3cadc;
+  --text: #111833;
+  --muted: #535d7c;
+  --saffron-text: #9a5b00;
+  --lagoon: #0b8276;
+  --shadow: 0 24px 50px -32px rgb(17 24 51 / 0.35);
+  color-scheme: light;
+}
+
+/* ── Base ───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 var(--step-0)/1.65 var(--body);
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: inherit;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+:focus-visible {
+  outline: 2px solid var(--lagoon);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+::selection {
+  background: var(--saffron);
+  color: var(--saffron-ink);
+}
+
+.wrap {
+  width: min(100% - 32px, var(--max));
+  margin-inline: auto;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  z-index: 100;
+  background: var(--saffron);
+  color: var(--saffron-ink);
+  padding: 8px 14px;
+  border-radius: var(--r-sm);
+}
+.skip:focus {
+  left: 16px;
+}
+.muted {
+  color: var(--muted);
+}
+
+.h2 {
+  font: 700 var(--step-3)/1.08 var(--display);
+  letter-spacing: -0.025em;
+  margin: 0 0 1.5rem;
+}
+.h3 {
+  font: 600 var(--step-1)/1.3 var(--display);
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+}
+.lead {
+  font-size: 1.125rem;
+  max-width: 62ch;
+  margin: 0 0 1rem;
+}
+
+.section {
+  padding-block: clamp(2rem, 4vw, 3rem);
+}
+.section--alt {
+  background: var(--bg-alt);
+}
+.section__intro {
+  margin: -0.75rem 0 2rem;
+}
+
+/* ── Buttons, chips, tags ───────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  border: 2px solid var(--saffron);
+  background: var(--saffron);
+  color: var(--saffron-ink);
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.2;
+  transition:
+    transform 0.15s,
+    background-color 0.2s,
+    border-color 0.2s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:disabled {
+  opacity: 0.6;
+  transform: none;
+  cursor: progress;
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+.btn--ghost:hover {
+  border-color: var(--saffron);
+}
+.btn--small {
+  padding: 0.5rem 1rem;
+  font-size: var(--step--1);
+}
+
+.chip {
+  padding: 0.42rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  font-size: var(--step--1);
+  font-weight: 500;
+  line-height: 1.3;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.chip:hover {
+  border-color: var(--saffron);
+}
+.chip.is-active {
+  background: var(--saffron);
+  border-color: var(--saffron);
+  color: var(--saffron-ink);
+}
+
+.link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--lagoon);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+.tags li {
+  font-size: 0.8rem;
+  padding: 0.22rem 0.62rem;
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--lagoon) 13%, transparent);
+  color: var(--lagoon);
+  font-weight: 500;
+}
+.tags li.is-match {
+  background: var(--saffron);
+  color: var(--saffron-ink);
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  font-size: 1.05rem;
+  flex: none;
+}
+.icon-btn:hover {
+  border-color: var(--saffron);
+}
+
+/* ── Social links (About and Contact) ───────────────────── */
+.socials {
+  list-style: none;
+  padding: 0;
+  margin: 1.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+.socials a:hover {
+  border-color: var(--saffron);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

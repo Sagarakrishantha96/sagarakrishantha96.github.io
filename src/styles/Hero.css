@@ -1,0 +1,154 @@
+/* Hero component styles */
+/* ── Hero ───────────────────────────────────────────────── */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 56px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  right: -18vw;
+  top: -22vw;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--saffron) 18%, transparent),
+    transparent 65%
+  );
+  pointer-events: none;
+}
+.hero > .wrap {
+  position: relative;
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+
+.hero__hello {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font: 500 var(--step-1) var(--display);
+  color: var(--muted);
+  margin: 0 0 0.75rem;
+}
+.hero__hello img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--saffron);
+  background: var(--surface);
+}
+
+.hero__name {
+  font: 800 var(--step-hero)/0.9 var(--display);
+  letter-spacing: -0.045em;
+  margin: 0 0 1.75rem;
+}
+.hero__word {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.07em;
+  white-space: nowrap;
+}
+.hero__word:last-child {
+  gap: 0.75rem;
+  color: var(--saffron);
+}
+
+/* Wide screens: name on one line, scaled to span the full content width */
+.hero__text {
+  container-type: inline-size;
+}
+@media (min-width: 640px) {
+  .hero__name {
+    font-size: 11.8cqi; /* tune this if the name falls short of / overflows the edge */
+    white-space: nowrap;
+  }
+  .hero__word {
+    display: inline-block;
+  }
+  /* first child of .hero__name is the sr-only span, so target the second word */
+  .hero__word + .hero__word {
+    margin-left: 0.25em;
+  }
+}
+.hero__word > span {
+  display: inline-block;
+  animation: rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--d);
+}
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+.hero__after {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.85s both;
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero__role {
+  font: 600 var(--step-2)/1.3 var(--display);
+  margin: 0 0 0.75rem;
+}
+.hero__intro {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin: 0 0 2rem;
+}
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  color: var(--muted);
+  font-size: var(--step--1);
+  margin: 0;
+}
+.hero__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.hero__proof {
+  margin: clamp(1.5rem, 3vw, 2rem) 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font: 500 var(--step-1)/1.4 var(--display);
+}
+
+@media (max-width: 920px) {
+  .hero {
+    min-height: auto;
+    padding-top: 104px;
+  }
+}
